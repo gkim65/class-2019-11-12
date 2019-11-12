@@ -1,0 +1,32 @@
+---
+title: "class-2019-11-12"
+author: "Sanjana Ramrajvel"
+date: "11/12/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(googlesheets4)
+library(tidyverse)
+
+```
+
+```{r}
+
+sheets_deauth()
+election_data <- read_sheet("13NhlT-Oik5P4NOKRWwrJ7xZQlddFNk81HHEw9wkWglM")
+
+ggplot(election_data, aes(x = dvote, y = partisanship)) +
+  geom_jitter(width = 0.1, height = 0) + 
+  geom_smooth(method = "lm", se = FALSE)
+
+```
+
+```{r}
+
+mod <- lm(data = election_data, dvote ~ partisanship)
+
+```
+
